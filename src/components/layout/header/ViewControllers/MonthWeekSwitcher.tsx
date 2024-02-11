@@ -16,18 +16,18 @@ export const MonthWeekSwitcher = () => {
 
     return (
         <HeaderItemStyled>
-            <StyledSwitcherButton onClick={(e) => handleSwitch(e, 'month')} active={period === 'month'}>Month</StyledSwitcherButton>
-            <StyledSwitcherButton onClick={(e) => handleSwitch(e, 'week')} active={period === 'week'}>Week</StyledSwitcherButton>
+            <StyledSwitcherButton onClick={(e) => handleSwitch(e, 'month')} $active={period === 'month'}>Month</StyledSwitcherButton>
+            <StyledSwitcherButton onClick={(e) => handleSwitch(e, 'week')} $active={period === 'week'}>Week</StyledSwitcherButton>
         </HeaderItemStyled>
     );
 };
 
-const StyledSwitcherButton = styled.button<{active?: boolean}>`
+const StyledSwitcherButton = styled.button<{$active: boolean}>`
   padding: 10px;
-  background-color: ${(props) => props.active ? colorConfig.bgThird : 'none'};
+  background-color: ${(props) => props.$active ? colorConfig.bgThird : 'none'};
   transition: all 0.2s;
   border: ${colorConfig.colorThird} 2px solid;
-  opacity: ${(props) => props.active ? 1 : 0.8};
+  opacity: ${(props) => props.$active ? 1 : 0.8};
   
   &:nth-child(1) {
     border-right-width: 1px;

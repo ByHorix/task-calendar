@@ -5,4 +5,4 @@ export const colorConfig = {
     colorPrimary: '#333333',
     colorSecondary: '#007BFF',
     colorThird: '#000000'
-}
+};
