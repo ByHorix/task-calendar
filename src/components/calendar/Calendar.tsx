@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {WeekDays} from "./WeekDays";
 import {MonthCells} from "./monthView/MonthCells";
+import {useAppSelector} from "../../hooks/useRedux";
 
 const CalendarWrapperStyled = styled.div`
   flex: 1;
@@ -12,12 +13,12 @@ const CalendarWrapperStyled = styled.div`
 `;
 
 export const Calendar = () => {
-    const today = new Date();
+    const currentDate = useAppSelector(state => state.layout.currentDate)
 
     return (
         <CalendarWrapperStyled>
             <WeekDays/>
-            <MonthCells date={today}/>
+            <MonthCells date={new Date(currentDate)}/>
         </CalendarWrapperStyled>
     );
 };

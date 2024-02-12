@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import {colorConfig} from "../../../configs/colorConfig";
 import {CurrentPeriod} from "./ViewControllers/CurrentPeriod";
 import {MonthWeekSwitcher} from "./ViewControllers/MonthWeekSwitcher";
+import {useAppSelector} from "../../../hooks/useRedux";
+import {endOfWeek, format, startOfWeek} from "date-fns";
+import {PeriodSwitcher} from "./ViewControllers/PeriodSwitcher";
 
 const StyledHeader = styled.header`
   background-color: ${colorConfig.bgSecondary};
@@ -14,9 +17,13 @@ const StyledHeader = styled.header`
 `
 
 export const Header = () => {
+    const store = useAppSelector(state => state.layout)
+    const period = store.view === 'month' ? format(store.currentDate, 'MMMM') : `${format(store.currentDate, 'MMM')} ${format(startOfWeek(store.currentDate), 'do')} - ${format(endOfWeek(store.currentDate), 'do')}`
+
     return (
         <StyledHeader>
-            <CurrentPeriod currentPeriod={'Month'}/>
+            <PeriodSwitcher/>
+            <CurrentPeriod currentPeriod={period}/>
             <MonthWeekSwitcher/>
         </StyledHeader>
     );

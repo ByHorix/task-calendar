@@ -1,20 +1,21 @@
 import styled from "styled-components";
-import {isThisMonth, isToday} from "date-fns";
+import {isSameMonth, isThisMonth, isToday} from "date-fns";
 import {colorConfig} from "../../../configs/colorConfig";
 import {format} from "date-fns";
+import {useAppSelector} from "../../../hooks/useRedux";
 
 const StyledCell = styled.div<{
-    $isThisMonth: boolean,
+    $isCurrentMonth: boolean,
     $isTodayDate: boolean
 }>`
   width: calc(100% / 7);
   min-height: calc(100% / 5.5) !important;
   flex-basis: calc(100% / 7 - 10px);
   margin-bottom: 10px;
-  background-color: ${(props) => props.$isThisMonth ? colorConfig.bgThird : colorConfig.bgPrimary};
-  opacity: ${(props) => props.$isThisMonth ? 1 : 0.7};
+  background-color: ${(props) => props.$isCurrentMonth ? colorConfig.bgThird : colorConfig.bgPrimary};
+  opacity: ${(props) => props.$isCurrentMonth ? 1 : 0.7};
   border: ${(props) => props.$isTodayDate ? colorConfig.colorSecondary : colorConfig.colorPrimary} 2px solid;
-  font-weight: ${(props) => props.$isThisMonth ? 700 : 400};
+  font-weight: ${(props) => props.$isCurrentMonth ? 700 : 400};
   border-radius: 5px;
   padding: 10px;
   box-sizing: border-box;
@@ -28,12 +29,13 @@ const StyledCell = styled.div<{
 `
 
 export const Cell = ({date}: { date: Date }) => {
-    const thisMonth = isThisMonth(date);
+    const currentDate = useAppSelector(state => state.layout.currentDate)
+
+    const isCurrentMonth = isSameMonth(date, currentDate);
     const isTodayDate = isToday(date);
-    console.log(isTodayDate, date);
 
     return (
-        <StyledCell $isThisMonth={thisMonth} $isTodayDate={isTodayDate}>
+        <StyledCell $isCurrentMonth={isCurrentMonth} $isTodayDate={isTodayDate}>
             <div className='cell-header'>
                 <div className='date'>
                     {format(date, 'MMM do')}

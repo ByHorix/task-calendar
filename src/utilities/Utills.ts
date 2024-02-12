@@ -42,3 +42,7 @@ export const generateMonthToShow = (date: Date) => {
 
     return [...getRestDaysOfPrevMonth(prevFullMonth, date), ...currentFullMonth, ...getRestDaysOfNextMonth(nextFullMonth, date)];
 }
+
+export const generatePeriodForWeek = (date: Date) => {
+
+}
