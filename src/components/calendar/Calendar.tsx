@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {WeekDays} from "./WeekDays";
 import {MonthCells} from "./monthView/MonthCells";
 import {useAppSelector} from "../../hooks/useRedux";
+import {WeekCells} from "./weekView/WeekCells";
 
 const CalendarWrapperStyled = styled.div`
   flex: 1;
@@ -12,13 +13,22 @@ const CalendarWrapperStyled = styled.div`
   box-sizing: border-box;
 `;
 
+const cellsForView = {
+    month: (
+        <>
+            <WeekDays/>
+            <MonthCells/>
+        </>
+    ),
+    week: <WeekCells/>
+}
+
 export const Calendar = () => {
-    const currentDate = useAppSelector(state => state.layout.currentDate)
+    const view = useAppSelector(state => state.layout.view);
 
     return (
         <CalendarWrapperStyled>
-            <WeekDays/>
-            <MonthCells date={new Date(currentDate)}/>
+            {cellsForView[view]}
         </CalendarWrapperStyled>
     );
 };

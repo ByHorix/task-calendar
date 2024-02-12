@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getMonth, setMonth} from "date-fns";
+import {format, getMonth, getWeek, setMonth, setWeek} from "date-fns";
 
 type LayoutState = {
     view: 'month' | 'week',
@@ -8,7 +8,7 @@ type LayoutState = {
 
 const initialState: LayoutState = {
     view: 'month',
-    currentDate: (new Date()).getTime()
+    currentDate: (new Date(format(Date.now(), 'yyyy MMM d'))).getTime()
 }
 
 const layoutSlice = createSlice({
@@ -21,11 +21,11 @@ const layoutSlice = createSlice({
         setMonthToNext: (state) => {
             state.currentDate = setMonth(state.currentDate, getMonth(state.currentDate) + 1).getTime();
         },
-        setWeekToPrev: () => {
-
+        setWeekToPrev: (state) => {
+            state.currentDate = setWeek(state.currentDate, getWeek(state.currentDate) - 1).getTime();
         },
-        setWeekToNext: () => {
-
+        setWeekToNext: (state) => {
+            state.currentDate = setWeek(state.currentDate, getWeek(state.currentDate) + 1).getTime();
         },
         switchView: (state, payload) => {
             state.view = payload.payload

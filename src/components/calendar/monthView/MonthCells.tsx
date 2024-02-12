@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import {generateMonthToShow} from "../../../utilities/Utills";
 import {Cell} from "./Cell";
+import {useAppSelector} from "../../../hooks/useRedux";
 
 const MonthCellsStyled = styled.div`
   display: flex;
@@ -10,16 +11,13 @@ const MonthCellsStyled = styled.div`
   //align-content: flex-start;
   flex: 1;
   height: 100%;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
 `;
 
-type Props = {
-    date: Date
-}
-
-export const MonthCells: React.FC<Props> = ({date}) => {
-    const monthToShow = generateMonthToShow(date)
+export const MonthCells = () => {
+    const date = useAppSelector(state => state.layout.currentDate);
+    const monthToShow = generateMonthToShow(new Date(date));
 
     return (
         <MonthCellsStyled>

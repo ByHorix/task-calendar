@@ -1,4 +1,4 @@
-import {eachDayOfInterval, endOfMonth, setMonth, startOfMonth} from "date-fns";
+import {eachDayOfInterval, endOfMonth, endOfWeek, setMonth, startOfMonth, startOfWeek} from "date-fns";
 
 const getAllDaysOfMonthByDate = (date: Date) => {
     const firstDayOfMonth = startOfMonth(date);
@@ -43,6 +43,12 @@ export const generateMonthToShow = (date: Date) => {
     return [...getRestDaysOfPrevMonth(prevFullMonth, date), ...currentFullMonth, ...getRestDaysOfNextMonth(nextFullMonth, date)];
 }
 
-export const generatePeriodForWeek = (date: Date) => {
+export const generateWeekToShow = (date: Date) => {
+    const weekStart = startOfWeek(date);
+    const weekEnd = endOfWeek(date);
 
+    return eachDayOfInterval({
+        start: weekStart,
+        end: weekEnd
+    });
 }

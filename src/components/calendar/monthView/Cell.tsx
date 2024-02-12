@@ -15,7 +15,6 @@ const StyledCell = styled.div<{
   background-color: ${(props) => props.$isCurrentMonth ? colorConfig.bgThird : colorConfig.bgPrimary};
   opacity: ${(props) => props.$isCurrentMonth ? 1 : 0.7};
   border: ${(props) => props.$isTodayDate ? colorConfig.colorSecondary : colorConfig.colorPrimary} 2px solid;
-  font-weight: ${(props) => props.$isCurrentMonth ? 700 : 400};
   border-radius: 5px;
   padding: 10px;
   box-sizing: border-box;
@@ -23,7 +22,8 @@ const StyledCell = styled.div<{
   
   & > .cell-header {
     & > .date {
-      
+      color: ${(props) => props.$isTodayDate ? colorConfig.colorSecondary : colorConfig.colorPrimary};
+      font-weight: ${(props) => props.$isCurrentMonth ? 700 : 400};
     }
   }
 `

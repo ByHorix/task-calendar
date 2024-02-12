@@ -6,7 +6,7 @@ const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const WeekDaysStyled = styled.div`
   display: flex;
   width: 100%;
-  padding: 20px 5%;
+  padding: 20px 2.5%;
   margin-bottom: 40px;
   background-color: ${colorConfig.bgSecondary};
   opacity: 0.9;

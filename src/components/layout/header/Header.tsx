@@ -18,7 +18,7 @@ const StyledHeader = styled.header`
 
 export const Header = () => {
     const store = useAppSelector(state => state.layout)
-    const period = store.view === 'month' ? format(store.currentDate, 'MMMM') : `${format(store.currentDate, 'MMM')} ${format(startOfWeek(store.currentDate), 'do')} - ${format(endOfWeek(store.currentDate), 'do')}`
+    const period = store.view === 'month' ? format(store.currentDate, 'yyyy MMMM') : `${format(store.currentDate, 'MMM')} ${format(startOfWeek(store.currentDate), 'do')} - ${format(endOfWeek(store.currentDate), 'do')}`
 
     return (
         <StyledHeader>
